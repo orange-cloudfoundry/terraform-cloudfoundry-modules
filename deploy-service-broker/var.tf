@@ -93,6 +93,10 @@ variable "broker_password" {
   type = "string"
   default = ""
 }
+variable "space_scoped" {
+  default = false
+}
 variable "service_access" {
   type = "list"
+  default = []
 }

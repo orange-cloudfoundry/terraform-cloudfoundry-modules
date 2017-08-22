@@ -30,5 +30,6 @@ resource "cloudfoundry_service_broker" "service_broker" {
   url = "${element(module.deploy_app.app_uris, 1)}"
   username = "${var.broker_username}"
   password = "${var.broker_password}"
+  space_id = "${var.space_scoped ? module.deploy_app.space_id : ""}"
   service_access = "${var.service_access}"
 }

@@ -142,17 +142,19 @@ module "deploy_myservicebroker" {
   broker_name = "superservicebroker"
   broker_username = "fakeuser"
   broker_password = "fakepassword"
+  space_scoped = false
   service_access = [{
     service = "fake-service"
   }]
 }
 ```
 
-Parameters `broker_name`, `broker_username`, `broker_password` and `service_access` are the only paremeters which are different from [deploy-app](#deploy-app) module.
+Parameters `broker_name`, `broker_username`, `broker_password`, `space_scoped` and `service_access` are the only paremeters which are different from [deploy-app](#deploy-app) module.
 
 - **broker_name**: *(Optional, default: `app name`)* Name of your service broker.
 - **broker_username**: *(Optional, default: `null`)* Username to authenticate to your service broker.
 - **broker_password**: *(Optional, default: `null`)* Password to authenticate to your service broker. **Note**: you can pass a base 64 encrypted gpg message if you [enabled password encryption](https://github.com/orange-cloudfoundry/terraform-provider-cloudfoundry#enable-password-encryption).
+- **space_scoped**: *(Optional, default: `false`)* if set to `true` the service broker will be created as a space-scoped service broker set on space asked. 
 - **service_access**: (**Required**) Add service access as many as you need, service access make you service broker accessible on marketplace:
   - **service**: (**Required**) Service name from your service broker catalog to activate. **Note**: if there is only service in your service access it will enable all plan on all orgs on your Cloud Foundry.
   - **plan**: *(Optional, default: `null`)* Plan from your service broker catalog attached to this service to activate. **Note**: if no `org_id` is given it will enable this plan on all orgs.

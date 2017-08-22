@@ -1,5 +1,5 @@
 data "cloudfoundry_stack" "default_stack" {
-  first = "${var.stack == "" ? true : false}"
+  first = "${var.stack == "" ? "true" : "false"}"
   name = "${var.stack == "" ? "" : var.stack}"
 }
 data "cloudfoundry_organization" "org_app" {
@@ -11,7 +11,7 @@ data "cloudfoundry_space" "space_app" {
 }
 
 data "cloudfoundry_domain" "domains_app" {
-  first = "${length(var.domains) == 0 ? true : false}"
+  first = "${length(var.domains) == 0 ? "true" : "false"}"
   count = "${length(var.domains) == 0 ? "1" : length(var.domains)}"
   name = "${length(var.domains) > 0 ? element(concat(var.domains, list("")), count.index) : ""}"
 }

@@ -19,11 +19,15 @@ variable "disk_quota" {
   type = "string"
   default = ""
 }
-variable "health-check-http-endpoint" {
+variable "health_check_http_endpoint" {
   type = "string"
   default = ""
 }
-variable "health-check-type" {
+variable "health_check_type" {
+  type = "string"
+  default = ""
+}
+variable "health_check_timeout" {
   type = "string"
   default = ""
 }

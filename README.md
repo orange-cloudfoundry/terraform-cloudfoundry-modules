@@ -30,8 +30,9 @@ module "deploy_myapp" {
   command = ""
   disk_quota = "1G"
   memory = "512M"
-  health-check-http-endpoint = ""
-  health-check-type = ""
+  health_check_http_endpoint = ""
+  health_check_type = ""
+  health_check_timeout = ""
   instances = 1
   diego = true
   started = true
@@ -65,12 +66,13 @@ module "deploy_myapp" {
 - **command**: *(Optional, default: `NULL`)* The command to start an app after it is staged.
 - **disk_quota**: *(Optional, default: `1G`)* The maximum amount of disk available to an instance of an app.
 - **domains**: *(Optional, default: `first shared domain found`)* use this parameters to provide multiple domains, this will create multiple routes created to your app.
-- **health-check-http-endpoint**: *(Optional, default: `NULL`)* Endpoint called to determine if the app is healthy. (Can  be use only when check type is http)
-- **health-check-type**: *(Optional, default: `port`)* Type of health check to perform. Others values are: 
+- **health_check_http_endpoint**: *(Optional, default: `NULL`)* Endpoint called to determine if the app is healthy. (Can  be use only when check type is http)
+- **health_check_type**: *(Optional, default: `port`)* Type of health check to perform. Others values are: 
   - http (Diego only)
   - port
   - process
   - none
+- **health_check_timeout**: *(Optional, default: NULL)* Timeout in seconds for health checking of an staged app when starting up.
 - **host**: *(Optional, default: `app name`)* Use this parameter to provide a hostname.
 - **instances**: *(Optional, default: `1`)* The number of instances of the app to run.
 - **memory**: *(Optional, default: `512M`)* The amount of memory each instance should have.
@@ -115,8 +117,9 @@ module "deploy_myservicebroker" {
   command = ""
   disk_quota = "1G"
   memory = "512M"
-  health-check-http-endpoint = ""
-  health-check-type = ""
+  health_check_http_endpoint = ""
+  health_check_type = ""
+  health_check_timeout = ""
   instances = 1
   diego = true
   started = true

@@ -41,6 +41,11 @@ resource "cloudfoundry_app" "app" {
   ports = "${var.ports}"
   services = [
     "${cloudfoundry_service.service_app.*.id}"]
+  command = "${var.command}"
+  disk_quota = "${var.disk_quota}"
+  health_check_http_endpoint = "${var.health_check_http_endpoint}"
+  health_check_type = "${var.health_check_type}"
+  health_check_timeout = "${var.health_check_timeout}"
 }
 resource "cloudfoundry_service" "service_app" {
   count = "${length(var.services)}"

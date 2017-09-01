@@ -33,7 +33,7 @@ variable "health_check_type" {
 }
 variable "health_check_timeout" {
   type = "string"
-  default = ""
+  default = 0
 }
 variable "host" {
   type = "string"

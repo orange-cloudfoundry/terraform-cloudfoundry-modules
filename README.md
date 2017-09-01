@@ -72,7 +72,7 @@ module "deploy_myapp" {
   - port
   - process
   - none
-- **health_check_timeout**: *(Optional, default: NULL)* Timeout in seconds for health checking of an staged app when starting up.
+- **health_check_timeout**: *(Optional, default: 0)* Timeout in seconds for health checking of an staged app when starting up.
 - **host**: *(Optional, default: `app name`)* Use this parameter to provide a hostname.
 - **instances**: *(Optional, default: `1`)* The number of instances of the app to run.
 - **memory**: *(Optional, default: `512M`)* The amount of memory each instance should have.

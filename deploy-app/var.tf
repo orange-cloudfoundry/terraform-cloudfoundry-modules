@@ -17,7 +17,7 @@ variable "command" {
 }
 variable "disk_quota" {
   type = "string"
-  default = ""
+  default = "1G"
 }
 variable "health_check_http_endpoint" {
   type = "string"
@@ -25,7 +25,7 @@ variable "health_check_http_endpoint" {
 }
 variable "health_check_type" {
   type = "string"
-  default = ""
+  default = "port"
 }
 variable "health_check_timeout" {
   type = "string"

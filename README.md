@@ -25,7 +25,7 @@ module "deploy_myapp" {
   name = "myapp"
   org = "system_domain"
   space = "a-space"
-  path = "/path/to/the/code/of/my/app/or/zip/url"
+  path = "/path/to/the/code/or/url"
   buildpack = ""
   command = ""
   disk_quota = "1G"
@@ -61,7 +61,7 @@ module "deploy_myapp" {
 - **name**: (**Required**) Name of your application.
 - **org**: (**Required**) Name of your organization.
 - **space**: (**Required**) Name of your space inside the organization.
-- **path**: (**Required**) Path to a folder which contains application code or url to a zip/jar file
+- **path**: (**Required**) Path to a folder which contains application code, url to a zip/jar, url to a tgz/tar or a git url following the scheme: https://[user:password@]mygit.com/myrepo.git[#tag-or-branch-or-commit-hash]
 - **buildpack**: *(Optional, default: `NULL`)* Buildpack to build the app. 3 options: a) Blank means autodetection; b) A Git Url pointing to a buildpack; c) Name of an installed buildpack.
 - **command**: *(Optional, default: `NULL`)* The command to start an app after it is staged.
 - **disk_quota**: *(Optional, default: `1G`)* The maximum amount of disk available to an instance of an app.

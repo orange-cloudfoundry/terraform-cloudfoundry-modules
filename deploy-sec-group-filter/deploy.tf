@@ -1,6 +1,6 @@
 module "deploy_sec_group" {
   source = "../deploy-app"
-  name = "${var.broker_suffix == "" ?  format("%s_sec_group", var.name) : format("%s%s", var.name, var.broker_suffix)}"
+  name = "${var.suffix == "" ?  format("%s_sec_group", var.name) : format("%s%s", var.name, var.suffix)}"
   space = "${var.sec_group_space}"
   org = "${var.sec_group_org}"
   buildpack = "java_buildpack"
@@ -8,9 +8,6 @@ module "deploy_sec_group" {
     "${var.sec_group_domain}"]
   memory = "256M"
   path = "https://github.com/orange-cloudfoundry/sec-group-broker-filter/releases/download/v${var.sec_group_filter_version}.RELEASE/service-broker-filter-securitygroups-${var.sec_group_filter_version}.RELEASE.jar"
-  diego = true
-  started = true
-  enable_ssh = false
   env_var = {
     "BROKER_FILTER_URL" = "${var.url}"
     "BROKER_FILTER_USER" = "${var.username}"

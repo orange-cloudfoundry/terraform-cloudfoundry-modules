@@ -1,0 +1,6 @@
+{
+  "idle-duration": "${idle_duration}",
+  "idle-exclude-from-auto-enrollment": "${idle_exclude}",
+  "secret": "${secret}",
+  "auto-enrollment": "${auto_enrollment}"
+}

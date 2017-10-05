@@ -81,16 +81,8 @@ variable "path_for_route" {
 variable "port_for_route" {
   default = -1
 }
-output "app_uris" {
-  depends_on = [
-    "cloudfoundry_app.app"]
-  value = [
-    "${cloudfoundry_route.route_app.*.uri}"]
-}
-output "space_id" {
-  value = "${data.cloudfoundry_space.space_app.id}"
-}
 variable "domains" {
   type = "list"
   default = []
 }
+

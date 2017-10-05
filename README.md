@@ -3,7 +3,7 @@
 This repo is a set of useful [terraform modules](https://www.terraform.io/docs/modules/index.html) to make some tasks painless.
 This also show what you can do with [terraform-provider-cloudfoundry](https://github.com/orange-cloudfoundry/terraform-provider-cloudfoundry) to create powerful module for powerful deployment/configuration.
 
-For now, 3 modules has been created:
+Available modules:
 
 - [deploy-app](#deploy-app): Deploy an application as you could do it with a cloud foundry manifest with some enhancements (with blue-green restage/deploy from [apps resource](https://github.com/orange-cloudfoundry/terraform-provider-cloudfoundry#applications))
 - [deploy-service-broker](#deploy-service-broker): Deploy a cloud foundry app and set it as a service broker

@@ -46,6 +46,7 @@ resource "cloudfoundry_app" "app" {
   health_check_http_endpoint = "${var.health_check_http_endpoint}"
   health_check_type = "${var.health_check_type}"
   health_check_timeout = "${var.health_check_timeout}"
+  buildpack = "${var.buildpack}"
 }
 resource "cloudfoundry_service" "service_app" {
   count = "${length(var.services)}"

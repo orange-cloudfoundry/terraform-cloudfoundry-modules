@@ -3,10 +3,13 @@
 This repo is a set of useful [terraform modules](https://www.terraform.io/docs/modules/index.html) to make some tasks painless.
 This also show what you can do with [terraform-provider-cloudfoundry](https://github.com/orange-cloudfoundry/terraform-provider-cloudfoundry) to create powerful module for powerful deployment/configuration.
 
-For now, 2 modules has been created:
+For now, 3 modules has been created:
 
-- [deploy-app](/deploy-app): Deploy an application as you could do it with a cloud foundry manifest with some enhancements (with blue-green restage/deploy from [apps resource](https://github.com/orange-cloudfoundry/terraform-provider-cloudfoundry#applications))
-- [deploy-service-broker](/deploy-service-broker): Deploy a cloud foundry app and set it as a service broker
+- [deploy-app](#deploy-app): Deploy an application as you could do it with a cloud foundry manifest with some enhancements (with blue-green restage/deploy from [apps resource](https://github.com/orange-cloudfoundry/terraform-provider-cloudfoundry#applications))
+- [deploy-service-broker](#deploy-service-broker): Deploy a cloud foundry app and set it as a service broker
+- [deploy-sec-group-filter](#deploy-sec-group-filter): Deploy a [sec-group-broker-filter](https://github.com/orange-cloudfoundry/sec-group-broker-filter) app on cloud foundry and set it in front of real service broker directly. 
+deploy-sec-group-filter is a service broker is designed to be chained in front-of other service brokers and dynamically open security groups to let apps bound to service instance emmit 
+outgoing traffic to IP addresses returned in the chained service instances credentials.
 
 ## Usage
 
@@ -162,3 +165,30 @@ Parameters `broker_name`, `broker_username`, `broker_password`, `space_scoped` a
   - **service**: (**Required**) Service name from your service broker catalog to activate. **Note**: if there is only service in your service access it will enable all plan on all orgs on your Cloud Foundry.
   - **plan**: *(Optional, default: `null`)* Plan from your service broker catalog attached to this service to activate. **Note**: if no `org_id` is given it will enable this plan on all orgs.
   - **org_id**: *(Optional, default: `null`)* Org id created from resource or data source [cloudfoundry_organization](#organizations) to activate this service. **Note**: if no `plan` is given it will all plans on this org.
+  
+  
+## deploy-sec-group-filter
+
+- **sec_group_org**: (**Required**) Organization name where the sec group broker app will be placed.
+- **sec_group_space**: (**Required**) Space name where the sec group broker app will be placed.
+- **sec_group_domain**: (**Required**) Domain name to use to create route for the sec group broker app.
+- **sec_group_filter_version**: (*default: "2.2.1"*) Which version of [sec-group-broker-filter](https://github.com/orange-cloudfoundry/sec-group-broker-filter) 
+to use (available version can be found [here](https://github.com/orange-cloudfoundry/sec-group-broker-filter/releases))
+- **suffix**: (Optional, *default: Empty*) To avoid conflicts in service offering id from both, the filter broker offering will have the specified suffix added if you want 
+that both the filter broker offering and target broker offering coexist in the marketplace.
+- **name**: (**Required**) Name of your service broker (should be the one you wanted without suffix).
+- **url**: (**Required**) URL to the target broker. 
+- **username**: (Optional, *default: Empty*) Basic auth username from the targeted broker.
+- **password**: (Optional, *default: Empty*) Basic auth password from the targeted broker.
+- **cf_api_endpoint**: (**Required**) CloudFoundry CC api host.
+- **cf_username**: (**Required**) CloudFoudry user with Org admin privileges on orgs where services will be bound.
+- **cf_password**: (**Required**) CloudFoudry user password.
+- **trusted_destination_hosts**: (Optional, *default: Empty*) Optionally restrict the IPs/ports in created security groups to a set of trusted destinations. 
+If empty or unspecified, any IP adress returned from the binding response will be granted access in created security groups. (e.g.: `["192.0.1.0-192.0.2.0", "10.0.0.2"]`)
+- **trusted_destination_ports**: (Optional, *default: Empty*) An optional trusted destination ports. (e.g.: `["3306", "3307", "3300-3400"]`)
+- **space_scoped**: *(Optional, default: `false`*) if set to `true` the service broker will be created as a space-scoped service broker set on `sec_group_space`. 
+- **service_access**: (**Required if space_scoped is false**) Add service access as many as you need, service access make you service broker accessible on marketplace:
+  - **service**: (**Required**) Service name from your service broker catalog to activate. **Note**: if there is only service in your service access it will enable all plan on all orgs on your Cloud Foundry.
+  - **plan**: *(Optional, default: `null`)* Plan from your service broker catalog attached to this service to activate. **Note**: if no `org_id` is given it will enable this plan on all orgs.
+  - **org_id**: *(Optional, default: `null`)* Org id created from resource or data source [cloudfoundry_organization](#organizations) to activate this service. **Note**: if no `plan` is given it will all plans on this org.
+  

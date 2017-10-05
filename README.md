@@ -169,6 +169,28 @@ Parameters `broker_name`, `broker_username`, `broker_password`, `space_scoped` a
   
 ## deploy-sec-group-filter
 
+```hcl
+module "deploy_myservicebroker" {
+  source = "../deploy-sec-group-filter"
+  cf_api_endpoint = "https://api.my.domain.com"
+  cf_username = "admin"
+  cf_password = "password"
+  sec_group_org = "an_org"
+  sec_group_space = "a_space"
+  sec_group_domain = "my.domain.com"
+  sec_group_filter_version = "2.2.1"
+  name = "myservicebroker"
+  suffix = "-sec-group"
+  space_scoped = true
+  url = "https://realsb.my.domain.com"
+  username = "user"
+  password = "password"
+  trusted_destination_ports = [3306]
+  trusted_destination_hosts = ["192.0.1.0-192.0.2.0"]
+  service_access = []
+}
+```
+
 - **sec_group_org**: (**Required**) Organization name where the sec group broker app will be placed.
 - **sec_group_space**: (**Required**) Space name where the sec group broker app will be placed.
 - **sec_group_domain**: (**Required**) Domain name to use to create route for the sec group broker app.
